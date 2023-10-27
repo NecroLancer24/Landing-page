@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Login Multiple User</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+      .login-box {
+        width: 300px;
+        margin: 100px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      input[type="text"],
+      input[type="password"] {
+        width: 97%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        background: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .password-toggle-button {
+        width: 100%;
+        padding: 10px;
+        background: #eee;
+        color: #333;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-box">
+      <h2>Login</h2>
+      <form id="login-form" onsubmit="return validateForm();">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <button
+          type="button"
+          class="password-toggle-button"
+          onclick="togglePasswordVisibility()"
+        >
+          Tampilkan/sembunyikan kata sandi
+        </button>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <script>
+      var passwordField = document.getElementById("password");
+      var passwordVisible = false;
+
+      function togglePasswordVisibility() {
+        passwordVisible = !passwordVisible;
+        passwordField.type = passwordVisible ? "text" : "password";
+      }
+
+      function validateForm() {
+        var username = document.getElementById("username").value;
+        var password = passwordField.value;
+
+        // Daftar pengguna Anda (pengguna dan kata sandi yang valid)
+        var users = [
+          { username: "admin", password: "admin" },
+          { username: "user2", password: "password2" },
+          // Tambahkan pengguna lain di sini
+        ];
+
+        for (var i = 0; i < users.length; i++) {
+          if (
+            users[i].username === username &&
+            users[i].password === password
+          ) {
+            alert("Login berhasil!");
+            window.location.href = "index.html"; // Mengarahkan ke halaman menu
+            return false; // Jangan lanjutkan dengan pengiriman formulir
+          }
+        }
+
+        alert("Login gagal. Periksa kembali username dan password Anda.");
+        return false;
+      }
+    </script>
+  </body>
+</html>
